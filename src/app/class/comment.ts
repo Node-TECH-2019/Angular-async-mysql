@@ -3,16 +3,23 @@ import { User } from './user';
 
 export class Comment {
 
+  id: number;
+  date: number;
+  message: string;
+  // initial: string;
+  // name: string;
+  user: User;
+
   // user: User;
   // name: string;
   // message: string;
-  date: number;
+  // date: number;
   // key?: string;
   // isEdit: boolean;
 
-  constructor(public user: User, public message: string) {
-    this.date = Date.now();
-  }
+  // constructor(public user: User, public message: string) {
+  //   this.date = Date.now();
+  // }
 
   // constructor(value: any) {
   //   this.user = value.user;

@@ -3,9 +3,10 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders,HttpClient } from '@angular/common/http';
 import { IpService } from './ip.service';
+import { catchError, map, tap } from 'rxjs/operators';
 
-import { Policy } from  '../policy';
-import { Observable } from 'rxjs';
+// import { Policy } from  '../policy';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -33,20 +34,48 @@ export class UniqueService {
     });
   }
 
-  readPolicies(): Observable<Policy[]>{
-    return this.http.get<Policy[]>(`${this.ip}api/read.php`);
+  readComments(): Observable<Comment[]>{
+    return this.http.get<Comment[]>(this.ip + 'chat-CRUD/read.php');
+    // .pipe(
+    //   tap(comments => console.log('fetched heroes')),
+    //   catchError(this.handleError<Comment[]>('getHeroes', []))
+    // );
   }
 
-  createPolicy(policy: Policy): Observable<Policy>{
-    return this.http.post<Policy>(`${this.ip}api/create.php`, policy);
+  // private handleError<T>(operation = 'operation', result?: T) {
+  //   return (error: any): Observable<T> => {
+
+  //     // TODO: リモート上のロギング基盤にエラーを送信する
+  //     console.error(error); // かわりにconsoleに出力
+
+  //     // TODO: ユーザーへの開示のためにエラーの変換処理を改善する
+  //     console.log(`${operation} failed: ${error.message}`);
+
+  //     // 空の結果を返して、アプリを持続可能にする
+  //     return of(result as T);
+  //   };
+  // }
+
+  // readComments(): Observable<Comment[]>{
+  //   return this.http.get<Comment[]>(
+  //     this.ip+'chat-CRUD/read.php',
+  //   );
+  // }
+
+  // readComments(): Observable<Comment[]>{
+  //   return this.http.get<Comment[]>(`${this.ip}chat-CRUD/read.php`);
+  // }
+
+  createComment(comment: Comment): Observable<Comment>{
+    return this.http.post<Comment>(`${this.ip}chat-CRUD/create.php`, comment);
   }
 
-  updatePolicy(policy: Policy){
-    return this.http.put<Policy>(`${this.ip}api/update.php`, policy);
+  updateComment(comment: Comment){
+    return this.http.put<Comment>(`${this.ip}chat-CRUD/update.php`, comment);
   }
 
-  deletePolicy(id: number){
-    return this.http.delete<Policy>(`${this.ip}api/delete.php/?id=${id}`);
+  deleteComment(id: number){
+    return this.http.delete<Comment>(`${this.ip}chat-CRUD/delete.php/?id=${id}`);
   }
 
 }

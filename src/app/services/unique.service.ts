@@ -3,10 +3,9 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders,HttpClient } from '@angular/common/http';
 import { IpService } from './ip.service';
-import { catchError, map, tap } from 'rxjs/operators';
 
-// import { Policy } from  '../policy';
-import { Observable, of } from 'rxjs';
+import { Read } from '../class/read';
+import { Observable } from  'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,66 +17,37 @@ export class UniqueService {
 
   checkUserName(username) {
     return new Promise(resolve => {
-
+    // console.log(this.ip+'validate/check-username.php?username='+username);
       let data={username:username};
-      this.http.get(
-        this.ip+'validate/check-username.php?username='+username,
+      this.http.get<string>(
+        this.ip+'api/validate/check-username.php?username='+username,
         {
           headers: new HttpHeaders().set('Content-Type', 'application/json'),
           responseType: 'json'
         }
      ).subscribe(
         res => { resolve(res) },//send success response
-       (err) => { resolve(false); }//send error response
+        (err) => { resolve(false) }//send error response
       );
 
     });
   }
 
-  readComments(): Observable<Comment[]>{
-    return this.http.get<Comment[]>(this.ip + 'chat-CRUD/read.php');
-    // .pipe(
-    //   tap(comments => console.log('fetched heroes')),
-    //   catchError(this.handleError<Comment[]>('getHeroes', []))
-    // );
+  readPolicies(): Observable<Read[]>{
+    return this.http.get<Read[]>(`${this.ip}api/read.php`);
   }
 
-  // private handleError<T>(operation = 'operation', result?: T) {
-  //   return (error: any): Observable<T> => {
-
-  //     // TODO: リモート上のロギング基盤にエラーを送信する
-  //     console.error(error); // かわりにconsoleに出力
-
-  //     // TODO: ユーザーへの開示のためにエラーの変換処理を改善する
-  //     console.log(`${operation} failed: ${error.message}`);
-
-  //     // 空の結果を返して、アプリを持続可能にする
-  //     return of(result as T);
-  //   };
-  // }
-
-  // readComments(): Observable<Comment[]>{
-  //   return this.http.get<Comment[]>(
-  //     this.ip+'chat-CRUD/read.php',
-  //   );
-  // }
-
-  // readComments(): Observable<Comment[]>{
-  //   return this.http.get<Comment[]>(`${this.ip}chat-CRUD/read.php`);
-  // }
-
-  createComment(comment: Comment): Observable<Comment>{
-    return this.http.post<Comment>(`${this.ip}chat-CRUD/create.php`, comment);
+  createRead(read: Read): Observable<Read>{
+    return this.http.post<Read>(`${this.ip}api/create.php`, read);
   }
 
-  updateComment(comment: Comment){
-    return this.http.put<Comment>(`${this.ip}chat-CRUD/update.php`, comment);
+  updateRead(read: Read){
+    return this.http.put<Read>(`${this.ip}api/update.php`, read);
   }
 
-  deleteComment(id: number){
-    return this.http.delete<Comment>(`${this.ip}chat-CRUD/delete.php/?id=${id}`);
+  deleteRead(id: number){
+    return this.http.delete<Read>(`${this.ip}api/delete.php/?id=${id}`);
   }
-
 }
 
 

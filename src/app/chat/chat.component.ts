@@ -50,10 +50,6 @@ export class ChatComponent implements OnInit {
       });
   }
 
-  selectRead(read: Read){
-    this.selectedRead = read;
-  }
-
   deleteComment(comment: Read): void{
     this.uniqueService.deleteComment(comment.id).subscribe((read: Read)=>{
       console.log("Read deleted, ", read);

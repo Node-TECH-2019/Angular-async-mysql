@@ -6,6 +6,7 @@ import { IpService } from './ip.service';
 
 import { Read } from '../class/read';
 import { Observable } from  'rxjs';
+import { User } from '../class/user';
 
 @Injectable({
   providedIn: 'root'
@@ -37,8 +38,9 @@ export class UniqueService {
     return this.http.get<Read[]>(`${this.ip}api/read.php`);
   }
 
-  createRead(read: Read): Observable<Read>{
-    return this.http.post<Read>(`${this.ip}api/create.php`, read);
+  createComment(comments: Read): Observable<Read>{
+    console.log(comments);
+    return this.http.post<Read>(`${this.ip}api/create.php`, comments);
   }
 
   updateRead(read: Read){

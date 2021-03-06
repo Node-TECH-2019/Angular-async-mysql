@@ -25,12 +25,16 @@ export class DashboardComponent implements OnInit {
   }
 
   createComment(comment) {
-    this.uniqueService.createRead(comment).subscribe((read: Read)=>{
-        console.log("Read created, ", read);
-      });
+    let selectedRead = this.selectedRead;
+    selectedRead.message = comment;
+    selectedRead.initial=this.currentUser.initial;
+    selectedRead.uid=this.currentUser.uid;
+    selectedRead.name=this.currentUser.name;
+    this.uniqueService.createComment(selectedRead);
+    comment = "";
   }
 
-  createOrUpdateRead(form){
+  updateRead(form){
       form.value.id = this.selectedRead.id;
       this.uniqueService.updateRead(form.value).subscribe((read: Read)=>{
         console.log("Read updated" , read);

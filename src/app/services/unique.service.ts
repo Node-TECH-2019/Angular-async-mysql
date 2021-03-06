@@ -33,7 +33,7 @@ export class UniqueService {
     });
   }
 
-  readPolicies(): Observable<Read[]>{
+  readComments(): Observable<Read[]>{
     return this.http.get<Read[]>(`${this.ip}api/read.php`);
   }
 

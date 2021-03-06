@@ -10,7 +10,7 @@ const CURRENT_USER: User = new User(2, '森井 將裕');
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  policies:  Read[];
+  comments:  Read[];
   selectedRead:  Read  = { id :  null, date: null, message:  null, uid:  null, name:  null, initial: null };
   comment = '';
   currentUser = CURRENT_USER;
@@ -18,9 +18,9 @@ export class DashboardComponent implements OnInit {
   constructor(private uniqueService: UniqueService) { }
 
   ngOnInit() {
-    this.uniqueService.readPolicies().subscribe((policies: Read[])=>{
-      this.policies = policies;
-      // console.log(this.policies);
+    this.uniqueService.readComments().subscribe((comments: Read[])=>{
+      this.comments = comments;
+      // console.log(this.comments);
     })
   }
 

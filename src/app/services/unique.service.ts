@@ -20,7 +20,7 @@ export class UniqueService {
     // console.log(this.ip+'validate/check-username.php?username='+username);
       let data={username:username};
       this.http.get<string>(
-        this.ip+'api/validate/check-username.php?username='+username,
+        this.ip+'chat-CRUD/validate/check-username.php?username='+username,
         {
           headers: new HttpHeaders().set('Content-Type', 'application/json'),
           responseType: 'json'
@@ -39,6 +39,7 @@ export class UniqueService {
 
   createComment(comments: Read): Observable<Read>{
     console.log(comments);
+    // console.log(this.http.post<Read>(`${this.ip}chat-CRUD/create.php`, comments));
     return this.http.post<Read>(`${this.ip}chat-CRUD/create.php`, comments);
   }
 

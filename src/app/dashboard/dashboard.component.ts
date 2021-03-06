@@ -30,7 +30,11 @@ export class DashboardComponent implements OnInit {
     selectedRead.initial=this.currentUser.initial;
     selectedRead.uid=this.currentUser.uid;
     selectedRead.name=this.currentUser.name;
-    this.uniqueService.createComment(selectedRead);
+    // console.log(this.uniqueService.createComment(selectedRead));
+    this.uniqueService.createComment(selectedRead).subscribe(
+        res => { console.log(res) },//send success response
+        (err) => { console.log(err) }//send error response
+      );;
     comment = "";
   }
 

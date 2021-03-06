@@ -23,14 +23,14 @@ export class DashboardComponent implements OnInit {
     this.readComments();
   }
 
-readComments() {
-  this.uniqueService.readComments().subscribe((comments: Read[])=>{
-    this.comments = comments;
-    // console.log(this.comments);
-  })
-}
+  readComments() {
+    this.uniqueService.readComments().subscribe((comments: Read[])=>{
+      this.comments = comments;
+      // console.log(this.comments);
+    })
+  }
 
-  createComment(comment) {
+  createComment(comment: string) {
     let selectedRead = this.selectedRead;
     selectedRead.message = comment;
     selectedRead.initial=this.currentUser.initial;
@@ -44,9 +44,8 @@ readComments() {
     comment = "";
   }
 
-  updateRead(form){
-      form.value.id = this.selectedRead.id;
-      this.uniqueService.updateRead(form.value).subscribe((read: Read)=>{
+  updateComment(comment: Read){
+      this.uniqueService.updateComment(comment).subscribe((read: Read)=>{
         console.log("Read updated" , read);
       });
   }
@@ -55,8 +54,8 @@ readComments() {
     this.selectedRead = read;
   }
 
-  deleteRead(id){
-    this.uniqueService.deleteRead(id).subscribe((read: Read)=>{
+  deleteComment(comment: Read): void{
+    this.uniqueService.deleteComment(comment.id).subscribe((read: Read)=>{
       console.log("Read deleted, ", read);
     });
   }

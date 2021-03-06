@@ -16,8 +16,8 @@
             <div class="d-flex w-100 justify-content-between">
               <h4 class="media-heading">{{ comment.name }}
                 <ng-container *ngIf="comment.uid == currentUser.uid">
-                  <i class="fa fa-edit ml-2" title="編集" (click)="comment.isEdit = !comment.isEdit"></i>
-                  <i class="fa fa-trash ml-2" title="削除"></i>
+                  <i class="fa fa-edit ml-2" title="編集" (click)="comment.isEdit = !comment.isEdit; comment.temp = comment.message"></i>
+                  <i class="fa fa-trash ml-2" title="削除" (click)="deleteComment(comment)"></i>
                 </ng-container>
               </h4>
               <small class="media-date">{{ comment.date | commentDate }}</small>
@@ -30,8 +30,8 @@
                 <textarea [(ngModel)]="comment.message" name="edit-comment" class="form-control"></textarea>
               </div>
               <div class="edit-buttons">
-                <button class="btn btn-succes btn-sm">保存</button>
-                <button class="btn btn-warning btn-sm">キャンセル</button>
+                <button class="btn btn-succes btn-sm" (click)="updateComment(comment)">保存</button>
+                <button class="btn btn-warning btn-sm" (click)="comment.isEdit = false; comment.message = comment.temp">キャンセル</button>
               </div>
             </ng-container>
           </div>

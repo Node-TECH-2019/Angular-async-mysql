@@ -43,11 +43,12 @@ export class UniqueService {
     return this.http.post<Read>(`${this.ip}chat-CRUD/create.php`, comments);
   }
 
-  updateRead(read: Read){
+  updateComment(read: Read){
+    console.log(read);
     return this.http.put<Read>(`${this.ip}chat-CRUD/update.php`, read);
   }
 
-  deleteRead(id: number){
+  deleteComment(id: number){
     return this.http.delete<Read>(`${this.ip}chat-CRUD/delete.php/?id=${id}`);
   }
 }

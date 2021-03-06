@@ -5,8 +5,15 @@ export  class  Read {
   message: string;
   uid: number;
   name: string;
+  temp?: string;
 
-  // constructor(public id: number, public date: number, public message: string, public uid: number, public name: string) {
-  //   this.initial = name.slice(0, 1);
-  // }
+  constructor(value: any) {
+    this.initial = value.initial;
+    this.id = value.id;
+    this.uid = value.uid;
+    this.name = value.name;
+    this.message = value.message;
+    this.date = value.date || Date.now();
+    this.temp = '';
+  }
 }

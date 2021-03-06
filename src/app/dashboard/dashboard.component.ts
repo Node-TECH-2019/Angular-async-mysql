@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Read } from '../class/read';
 import { UniqueService } from '../services/unique.service';
 import { User } from '../class/user';
+import { timer } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 const CURRENT_USER: User = new User(2, '森井 將裕');
 @Component({
@@ -18,11 +20,15 @@ export class DashboardComponent implements OnInit {
   constructor(private uniqueService: UniqueService) { }
 
   ngOnInit() {
-    this.uniqueService.readComments().subscribe((comments: Read[])=>{
-      this.comments = comments;
-      // console.log(this.comments);
-    })
+    this.readComments();
   }
+
+readComments() {
+  this.uniqueService.readComments().subscribe((comments: Read[])=>{
+    this.comments = comments;
+    // console.log(this.comments);
+  })
+}
 
   createComment(comment) {
     let selectedRead = this.selectedRead;

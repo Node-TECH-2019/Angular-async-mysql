@@ -4,7 +4,13 @@ import { AsyncValidator } from './validation/asyncValidator';
 import { UniqueService } from './services/unique.service';
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
+  // templateUrl: './app.component.html',
+  template: `
+    <ac-header></ac-header>
+    <div class="page">
+      <router-outlet></router-outlet>
+    </div>
+  `,
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {

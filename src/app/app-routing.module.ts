@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { ChatComponent } from './chat/chat.component';
+import { NotFoundComponent } from './core/components/not-found/not-found.component';
 
 
 const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent }
+  { path: '', component: ChatComponent },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({

@@ -7,11 +7,11 @@ import { switchMap } from 'rxjs/operators';
 
 const CURRENT_USER: User = new User(2, '森井 將裕');
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-chat',
+  templateUrl: './chat.component.html',
+  styleUrls: ['./chat.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class ChatComponent implements OnInit {
   comments:  Read[];
   selectedRead:  Read  = { id :  null, date: null, message:  null, uid:  null, name:  null, initial: null };
   comment = '';

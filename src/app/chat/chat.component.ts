@@ -42,17 +42,20 @@ export class ChatComponent implements OnInit {
         (err) => { console.log(err) }//send error response
       );;
     comment = "";
+    this.readComments();
   }
 
   updateComment(comment: Read){
-      this.uniqueService.updateComment(comment).subscribe((read: Read)=>{
-        console.log("Read updated" , read);
-      });
+    this.uniqueService.updateComment(comment).subscribe((read: Read)=>{
+      console.log("Read updated" , read);
+    });
+    this.readComments();
   }
 
   deleteComment(comment: Read): void{
     this.uniqueService.deleteComment(comment.id).subscribe((read: Read)=>{
       console.log("Read deleted, ", read);
     });
+    this.readComments();
   }
 }
